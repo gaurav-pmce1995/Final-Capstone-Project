@@ -1,0 +1,86 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <!-- Create new kanban route to add kanban pop up -->
+    <div class="header-container">
+      <span class="header-title">Create a Kanban</span>
+      <button mat-icon-button (click)="openAddKanbanDialog()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="partition partition1">
+      <h2 class="title-container">Kanban</h2>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let kanban of createdKanban">
+          <div class="kanban-container">
+            <p [matMenuTriggerFor]="kanbanMenu" class="kanban-name">
+              {{ kanban.kanbanName }}
+            </p>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openAddMemberDialog(kanban)">
+                <mat-icon>person</mat-icon>
+                <span>Add Member</span>
+              </button>
+              <button mat-menu-item (click)="openAddBoardDialog(kanban)">
+                <mat-icon>add</mat-icon>
+                <span>Create New Board</span>
+              </button>
+              <button mat-menu-item (click)="deleteKanban(kanban)">
+                <mat-icon color="warn">delete</mat-icon>
+                <span>Delete Kanban</span>
+              </button>
+            </mat-menu>
+          </div>
+          <mat-menu #kanbanMenu="matMenu" xPosition="after">
+            <ng-container *ngFor="let board of kanban.boards">
+              <div class="board-name">
+                <button class="board-btn" mat-menu-item (click)="goToBoard(kanban, board)">
+                  {{ board.boardName }}
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteBoard(kanban, board)">
+                  <mat-icon class="board-delete-icon">delete</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+          </mat-menu>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="partition partition2">
+      <h2 class="title-container">Shared Kanban</h2>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let kanban of assignedKanban">
+          <div class="kanban-container">
+            <p [matMenuTriggerFor]="kanbanMenu" class="kanban-name">
+              {{ kanban.kanbanName }}
+            </p>
+          </div>
+          <mat-menu #kanbanMenu="matMenu" xPosition="after">
+            <ng-container *ngFor="let board of kanban.boards">
+              <button mat-menu-item (click)="goToBoard(kanban, board)">
+                {{ board.boardName }}
+                <!-- <button mat-icon-button (click)="deleteBoard">
+                    <mat-icon>delete</mat-icon>
+                  </button> -->
+              </button>
+            </ng-container>
+          </mat-menu>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-board *ngIf="selectedKanban && selectedBoard" [selectedKanban]="selectedKanban"
+      [selectedBoard]="selectedBoard"></app-board>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

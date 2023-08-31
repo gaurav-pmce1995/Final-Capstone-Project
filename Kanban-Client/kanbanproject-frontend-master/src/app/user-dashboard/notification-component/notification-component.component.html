@@ -1,0 +1,33 @@
+ <!--<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>notifications</mat-icon> 
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="notification">
+    
+      <p>Email: {{ email }}</p>
+      <p>Notification Message: {{ notificationMessage }}</p>
+      <p>Kanban Name: {{ kanbanName }}</p>
+    </div>
+  </mat-expansion-panel> -->
+
+  <div class="notification">
+  <mat-list>
+    <mat-list-item *ngFor="let notification of notifications">
+      <span matListItemTitle>Notification :</span>
+      <span   matListItemLine *ngIf="notification!.email">{{notification?.email}}</span>
+    
+    <br>
+    
+      <!-- <span matListItemTitle>notificationMessage</span> -->
+      <span matListItemLine *ngIf="notification!.notificationMessage">{{notification?.notificationMessage}}</span>
+   
+    <br>
+    
+      <!-- <span matListItemTitle>KanbanName</span> -->
+      <span matListItemLine *ngIf="notification!.kanbanName">{{notification?.kanbanName.kanban}}</span>
+    </mat-list-item>
+  </mat-list>
+  </div>

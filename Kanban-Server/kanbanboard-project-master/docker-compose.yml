@@ -1,0 +1,122 @@
+version: '3.9'
+
+services:
+# Database - MySQL service
+  mysqlservice:
+    image: mysql:5.7
+    container_name: mysql_container
+    networks:
+      - kanban-network
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+# Database - MongoDB Service
+  mongodbservice:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - '27017:27017'
+    networks:
+      - kanban-network
+
+# Discovery Registry - Eureka Server
+  eurekaserver:
+    build: /eureka-server
+    container_name: eureka_container
+    networks:
+      - kanban-network
+    ports:
+      - '8761:8761'
+    restart: always
+
+# Routing - API Gateway
+  apigateway:
+    build: /api-gateway-service
+    container_name: api-gateway_container
+    networks:
+      - kanban-network
+    ports:
+      - '9000:9000'
+    restart: always
+
+# Message Broker - RabbitMQ
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq_container
+    networks:
+      - kanban-network
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    restart: always
+
+# Service - Authentication
+  authenticationservice:
+    build: /authentication-service
+    container_name: auth-service_container
+    networks:
+      - kanban-network
+    ports:
+      - '5000:5000'
+    depends_on:
+      - mysqlservice
+      - eurekaserver
+      - apigateway
+    restart: always
+
+# Service - Task Management
+  kanbanservice:
+    build: /task-management-service
+    container_name: kanban-service_container
+    networks:
+      - kanban-network
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mongodbservice
+      - eurekaserver
+      - apigateway
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq_container
+    restart: always
+
+# Service - User Profile
+  userprofileservice:
+    build: /user-profile-service
+    container_name: user-profile-service_container
+    networks:
+      - kanban-network
+    ports:
+      - '9292:9292'
+    depends_on:
+      - mongodbservice
+      - eurekaserver
+      - apigateway
+    restart: always
+
+# Service - Notification
+  notificationservice:
+    build: /notification-service
+    container_name: notification-service_container
+    networks:
+      - kanban-network
+    ports:
+      - '8089:8089'
+    depends_on:
+      - mongodbservice
+      - eurekaserver
+      - apigateway
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq_container
+    restart: always
+
+
+# Custom bridge network for inter-container communication
+networks:
+  kanban-network:
+    driver: bridge

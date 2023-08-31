@@ -1,0 +1,30 @@
+<section class="form-section">
+    <h1 class="form-heading">Login Form</h1>
+    <br>
+    <form [formGroup]="loginForm" (ngSubmit)="sendLoginData()" class="form-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Id / UserName</mat-label>
+        <input matInput type="email" formControlName="usernameOrEmail" required>
+        <mat-error *ngIf="loginForm.get('usernameOrEmail')?.hasError('required')">
+          Username or Email is required
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <br>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+        <mat-error *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+          <ng-container *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</ng-container>
+        </mat-error>
+      </mat-form-field>
+      <br>
+    
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+<br><br>
+      <hr>
+      <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ; margin: 10px; color: black;">Can't Login? <a [routerLink]="'/signup'">Sign up!</a></p>
+      
+    </form>
+    </section>

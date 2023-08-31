@@ -1,0 +1,30 @@
+
+<section class="form-section">
+    <h1 class="form-heading">Task</h1>
+    <br>
+    <form [formGroup]="myForm" (ngSubmit)="saveForm()">
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <br>
+  <br>
+
+  <mat-radio-group formControlName="priority">
+    <mat-radio-button value="urgent">Urgent</mat-radio-button>
+    <mat-radio-button value="low">Low</mat-radio-button>
+  </mat-radio-group>
+  <br>
+  <br>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Assign To Member</mat-label>
+    <input matInput type="email" formControlName="teamName" >
+  </mat-form-field>
+  <br>
+  <br>
+
+  <button mat-raised-button color="primary" type="submit">Save</button>
+</form>
+
+    </section>

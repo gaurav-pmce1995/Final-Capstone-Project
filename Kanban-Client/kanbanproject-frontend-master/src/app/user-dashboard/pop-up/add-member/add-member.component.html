@@ -1,0 +1,8 @@
+
+<form (ngSubmit)="onSubmit()">
+  <h2>Add Member</h2>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Member Email" [(ngModel)]="memberEmail" name="memberEmail" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Add</button>
+</form>

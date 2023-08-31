@@ -1,0 +1,98 @@
+<mat-toolbar>
+  <span>
+    {{ selectedKanban?.kanbanName }} / {{ selectedBoard?.boardName }}</span
+  >
+</mat-toolbar>
+
+<div class="taskStatus-container">
+  <form class="taskStatus-form" [formGroup]="taskStatusForm">
+    <mat-form-field appearance="outline">
+      <input
+        formControlName="taskStatusName"
+        matInput
+        placeholder="Create Task Status"
+      />
+      <button
+        (click)="createTaskStatus()"
+        matSuffix
+        mat-icon-button
+        color="primary"
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
+
+<div class="columns-container" cdkDropListGroup>
+  <!-- Task Status -->
+  <div
+    class="column-container"
+    *ngFor="let taskStatus of selectedBoard?.taskStatuses"
+  >
+    <div
+      class="task-list"
+      cdkDropList
+      [cdkDropListData]="taskStatus.tasks"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task-list-header">
+        <span>
+          {{ taskStatus.taskStatusName }}
+        </span>
+        <button
+          mat-icon-button
+          (click)="openEditTaskStatusDialog(selectedBoard!, taskStatus!)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Task -->
+      <div class="task-box-container">
+        <div
+          class="task-box"
+          [ngStyle]="{
+            backgroundColor: task.priority === 'Urgent' ? 'lightcoral' : ''
+          }"
+          color=""
+          *ngFor="let task of taskStatus.tasks"
+          cdkDrag
+          [cdkDragData]="task"
+        >
+          {{ task.title }}
+          <div class="add-btn">
+            <button
+              mat-icon-button
+              (click)="
+                openEditTaskDialog(
+                  selectedBoard!,
+                  taskStatus.taskStatusName!,
+                  task
+                )
+              "
+            >
+              <mat-icon class="task-edit-icon">edit</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <form class="add-task-form" [formGroup]="taskForm">
+      <mat-form-field class="add-task" appearance="outline">
+        <input formControlName="title" matInput placeholder="Add a task" />
+        <button
+          (click)="addTask(taskStatus.taskStatusName)"
+          matSuffix
+          mat-icon-button
+          color="primary"
+        >
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
+</div>

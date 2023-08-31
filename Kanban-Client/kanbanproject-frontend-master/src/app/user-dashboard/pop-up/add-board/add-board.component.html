@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSubmit()">
+  <h2>Create Board</h2>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Board Name" [(ngModel)]="boardName" name="boardName" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Add</button>
+</form>

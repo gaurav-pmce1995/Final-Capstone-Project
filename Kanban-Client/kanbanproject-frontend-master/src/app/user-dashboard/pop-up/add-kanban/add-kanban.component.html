@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()">
+  <h2>Create Kanban</h2>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Kanban Name" [(ngModel)]="kanbanName" name="kanbanName" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Add</button>
+</form>
+

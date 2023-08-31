@@ -1,0 +1,66 @@
+<section class="form-section">
+  <h1 class="form-heading">Your Details</h1>
+  <br>
+
+  <form (ngSubmit)="sendUpdatedData()" class="mat-form">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" name="firstName" [(ngModel)]="userProfile.firstName" required minlength="3">
+      <mat-error
+        *ngIf="signupForm.get('firstName')?.invalid && (signupForm.get('firstName')?.dirty || signupForm.get('firstName')?.touched)">
+        <ng-container *ngIf="signupForm.get('firstName')?.errors?.['required']">firstName is required</ng-container>
+        <ng-container *ngIf="signupForm.get('firstName')?.errors?.['minlength']">firstName must be at least 3 characters
+          long</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" name="lastName" [(ngModel)]="userProfile.lastName" required minlength="3">
+      <mat-error
+        *ngIf="signupForm.get('lastName')?.invalid && (signupForm.get('lastName')?.dirty || signupForm.get('lastName')?.touched)">
+        <ng-container *ngIf="signupForm.get('lastName')?.errors?.['required']">lastName is required</ng-container>
+        <ng-container *ngIf="signupForm.get('lastName')?.errors?.['minlength']">lastName must be at least 3 characters
+          long</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" [(ngModel)]="userProfile.email" required readonly>
+      <mat-error
+        *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+        <ng-container *ngIf="signupForm.get('email')?.errors?.['required']">Email Id is required</ng-container>
+        <ng-container *ngIf="signupForm.get('email')?.errors?.['email']">Email Id must be a valid email
+          address</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    
+
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput type="text" name="address" [(ngModel)]="userProfile.address" required>
+      <mat-error *ngIf="signupForm.get('email')?.dirty || signupForm.get('email')?.touched">
+        <ng-container *ngIf="signupForm.get('email')?.errors?.['required']">Address is required</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Mobile</mat-label>
+      <input matInput type="text" name="mobile" [(ngModel)]="userProfile.mobile" required minlength="10">
+      <mat-error
+        *ngIf="signupForm.get('mobile')?.invalid && (signupForm.get('mobile')?.dirty || signupForm.get('mobile')?.touched)">
+        <ng-container *ngIf="signupForm.get('mobile')?.errors?.['required']">Mobile is required</ng-container>
+        <ng-container *ngIf="signupForm.get('mobile')?.errors?.['minlength']">Mobile must be at least 10 digits
+          long</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <button mat-raised-button color="primary" type="submit"> Update </button>
+  </form>
+</section>

@@ -1,0 +1,16 @@
+.form-section{
+    background-color: burlywood;
+    }
+    .form-heading {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+        display: flex;
+        justify-content: center;
+        background-color:cadetblue;
+      }
+    .mat-form{
+    display: flex;
+      flex-direction: column; /* Stacking elements vertically */
+      justify-content: center; /* Center vertically */
+      align-items: center; /* Center horizontally */
+      height: 100vh; /* Set container height to full viewport height */
+    }

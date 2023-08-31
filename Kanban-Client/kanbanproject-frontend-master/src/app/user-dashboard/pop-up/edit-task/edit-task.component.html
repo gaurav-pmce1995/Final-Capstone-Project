@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()">
+  <h2>Task Detail</h2>
+  <mat-form-field appearance="outline">
+    <input matInput type="text" placeholder="Task Name" [(ngModel)]="selectedTask.title" name="title" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <input matInput type="text" placeholder="Description" [(ngModel)]="selectedTask.description" name="description"
+      required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <input matInput type="date" placeholder="Creation Date" [(ngModel)]="selectedTask.createDate" name="creation date"
+      [readonly]>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Due Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedTask.dueDate" name="due date">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedTask.priority" name="priority">
+    <mat-radio-button value="Urgent">Urgent</mat-radio-button>
+    <mat-radio-button value="Normal">Normal</mat-radio-button>
+  </mat-radio-group>
+  <div class="btn-container">
+    <button mat-raised-button color="warn" (click)="deleteTask()">Delete</button>
+    <button mat-raised-button color="primary" type="submit">update</button>
+  </div>
+
+</form>

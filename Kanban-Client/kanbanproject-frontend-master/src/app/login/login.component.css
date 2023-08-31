@@ -1,0 +1,40 @@
+.form-container{
+    width: 400px; 
+    padding-top: 40px;
+    padding-bottom: 20px;
+    /* padding:20px; */
+    background-color: #f1daea;
+    border-radius: 5px;
+    margin:5px;
+    
+  
+}
+.form-section{
+    text-align: center;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding:50px;
+    height: 100vh;
+    /* background: linear-gradient( rgb(240, 210, 233),#d48c8c); */
+    background-image:url('../images/background.jpg')
+  };
+
+  .mat-form-field {
+    width: 100%;
+    
+  }
+  
+
+.mat-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 0px;
+  }
+
+.form-heading {
+    text-align: center;
+    margin-bottom: 20px; 
+  }

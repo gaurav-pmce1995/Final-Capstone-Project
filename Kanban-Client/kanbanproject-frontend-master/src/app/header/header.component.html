@@ -1,0 +1,51 @@
+<mat-toolbar >
+  <span>KANBAN BOARD</span>
+  <span class="spacer"></span>
+<div>
+
+  <div class="signupdiv">
+  <button  *ngIf="!isAuthorize" mat-raised-button color="primary" routerLink="/signup">
+    Signup
+  </button>
+  <button *ngIf="!isAuthorize" mat-raised-button color="primary" routerLink="/login">
+    Login
+  </button>
+  </div>
+
+ <div class="header-icons-container">
+
+  <div *ngIf="isAuthorize">
+    <button class="home-icon" routerLink="/dashboard" mat-icon-button>
+      <mat-icon>home</mat-icon>
+    </button>
+<!-- 
+    <button class="bell-icon" routerLink="/notification" mat-icon-button>
+      <mat-icon>notifications_none</mat-icon>
+    </button> -->
+
+    <button mat-icon-button [matBadge]="notificationCount" matBadgePosition="above after" (click)="goToNotification()">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button class ="image-button" [matMenuTriggerFor]="menu">
+      <img [src]=userprofile.profilePictureUrl >
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openImageUploadDialog()">
+        <mat-icon>add_a_photo</mat-icon>
+        Upload Image
+      </button>
+      <button routerLink="/profile" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item (click)="logout()" routerLink="/login">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+  </div>
+</mat-toolbar>

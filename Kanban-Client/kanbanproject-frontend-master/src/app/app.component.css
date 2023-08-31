@@ -1,0 +1,34 @@
+#header{
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center; 
+    width: 80vw;
+    padding:20px;
+   
+}
+#icons {
+    position: absolute;
+    right: 10px;
+}
+#icons > * {
+    margin-right: 15px;
+}
+
+.toolbar-image{
+    height:50px;
+    width:50px;
+    margin-right: 10px;
+}
+mat-sidenav-container{
+    background-color: antiquewhite;
+}
+mat-toolbar{
+    background-color: lightblue;
+}
+h2{
+    color:whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight:bolder;
+    font-size:larger;
+}

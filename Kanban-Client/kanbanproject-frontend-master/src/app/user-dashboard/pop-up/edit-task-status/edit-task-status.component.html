@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()">
+  <h2>Task Status</h2>
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      type="text"
+      placeholder="Status Name"
+      [(ngModel)]="selectedTaskStatus.taskStatusName"
+      name="status-name"
+      required
+    >
+  </mat-form-field>
+  <div class="btn-container">
+    <button mat-raised-button color="warn" (click)="deleteTaskStatus()">Delete</button>
+    <button mat-raised-button color="primary" type="submit">Update</button>
+  </div>
+</form>
